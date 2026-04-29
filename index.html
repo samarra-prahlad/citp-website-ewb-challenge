@@ -1,0 +1,1036 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lama Lama Low-Impact Accommodation — EWB Challenge DA 2.3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+    :root {
+        --stone: #f5f0e8;
+        --bark: #6b4f35;
+        --bark-light: #8c6a4a;
+        --moss: #4a5e3a;
+        --moss-light: #6b8a52;
+        --clay: #b5763a;
+        --clay-light: #d4956a;
+        --sand: #e8dcc8;
+        --sand-dark: #c9b99a;
+        --charcoal: #2c2820;
+        --muted: #7a6f62;
+        --white: #fdfaf5;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        font-family: 'DM Sans', sans-serif;
+        background: var(--stone);
+        color: var(--charcoal);
+        font-size: 16px;
+        line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--charcoal);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 2.5rem;
+        height: 60px;
+        border-bottom: 2px solid var(--clay);
+    }
+
+    .nav-logo {
+        font-family: 'Playfair Display', serif;
+        color: var(--stone);
+        font-size: 15px;
+        letter-spacing: 0.02em;
+        line-height: 1.3;
+    }
+
+    .nav-logo span { color: var(--clay-light); }
+
+    .nav-links {
+        display: flex;
+        gap: 0;
+        list-style: none;
+    }
+
+    .nav-links a {
+        color: var(--sand-dark);
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 400;
+        padding: 0 1rem;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        transition: color 0.2s, background 0.2s;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -2px;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+        color: var(--white);
+        border-bottom-color: var(--clay-light);
+    }
+
+    /* PAGES */
+    .page { display: none; min-height: calc(100vh - 60px); }
+    .page.active { display: block; }
+
+    /* HERO */
+    .hero {
+        background: var(--charcoal);
+        padding: 5rem 2.5rem 4rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 40px,
+        rgba(107,79,53,0.06) 40px,
+        rgba(107,79,53,0.06) 41px
+        );
+    }
+
+    .hero-inner {
+        max-width: 800px;
+        position: relative;
+    }
+
+    .hero-tag {
+        display: inline-block;
+        background: var(--clay);
+        color: var(--white);
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 4px 12px;
+        border-radius: 2px;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(2rem, 5vw, 3.2rem);
+        color: var(--white);
+        line-height: 1.2;
+        margin-bottom: 1.25rem;
+        font-weight: 600;
+    }
+
+    .hero h1 em {
+        color: var(--clay-light);
+        font-style: italic;
+    }
+
+    .hero-sub {
+        color: var(--sand-dark);
+        font-size: 16px;
+        font-weight: 300;
+        max-width: 560px;
+        line-height: 1.8;
+        margin-bottom: 2rem;
+    }
+
+    .hero-meta {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .hero-meta-item {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .hero-meta-label {
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+    }
+
+    .hero-meta-value {
+        font-size: 14px;
+        color: var(--sand);
+        font-weight: 400;
+    }
+
+    /* CONTENT LAYOUT */
+    .content {
+        max-width: 820px;
+        margin: 0 auto;
+        padding: 3rem 2rem 5rem;
+    }
+
+    .content-wide {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 3rem 2rem 5rem;
+    }
+
+    /* SECTION HEADERS */
+    .section-label {
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--clay);
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+
+    h2.section-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--charcoal);
+        margin-bottom: 1.75rem;
+        line-height: 1.25;
+    }
+
+    h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--bark);
+        margin: 2rem 0 0.75rem;
+    }
+
+    p { margin-bottom: 1.1rem; color: var(--charcoal); }
+
+    /* CARDS */
+    .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+        margin: 2rem 0;
+    }
+
+    .card {
+        background: var(--white);
+        border: 1px solid var(--sand-dark);
+        border-radius: 8px;
+        padding: 1.25rem;
+    }
+
+    .card-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 6px;
+        background: var(--moss);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0.75rem;
+    }
+
+    .card-icon svg { width: 18px; height: 18px; fill: var(--white); }
+
+    .card h4 {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--charcoal);
+        margin-bottom: 0.4rem;
+    }
+
+    .card p {
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    /* PULL QUOTE */
+    .pull-quote {
+        border-left: 3px solid var(--clay);
+        padding: 1rem 1.5rem;
+        margin: 2rem 0;
+        background: var(--white);
+        border-radius: 0 6px 6px 0;
+    }
+
+    .pull-quote p {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.1rem;
+        font-style: italic;
+        color: var(--bark);
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    /* STAT ROW */
+    .stat-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 12px;
+        margin: 2rem 0;
+    }
+
+    .stat {
+        background: var(--white);
+        border: 1px solid var(--sand-dark);
+        border-radius: 8px;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    .stat-number {
+        font-family: 'Playfair Display', serif;
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--moss);
+        line-height: 1;
+        margin-bottom: 4px;
+    }
+
+    .stat-label {
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.4;
+    }
+
+    /* TABLE */
+    .table-wrap { overflow-x: auto; margin: 2rem 0; }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+        background: var(--white);
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid var(--sand-dark);
+    }
+
+    thead { background: var(--charcoal); }
+    thead th {
+        color: var(--sand);
+        padding: 10px 14px;
+        text-align: left;
+        font-weight: 500;
+        font-size: 12px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+    }
+
+    tbody tr { border-bottom: 1px solid var(--sand); }
+    tbody tr:last-child { border: none; }
+    tbody tr.winner { background: #f0f5eb; }
+
+    td {
+        padding: 10px 14px;
+        color: var(--charcoal);
+        vertical-align: top;
+    }
+
+    .score-pill {
+        display: inline-block;
+        background: var(--moss);
+        color: var(--white);
+        font-size: 12px;
+        font-weight: 500;
+        padding: 2px 10px;
+        border-radius: 20px;
+    }
+
+    .score-pill.winner { background: var(--moss); }
+    .score-pill.mid { background: var(--bark-light); }
+    .score-pill.low { background: var(--muted); }
+
+    /* PHASE TIMELINE */
+    .timeline { margin: 2rem 0; }
+
+    .timeline-item {
+        display: flex;
+        gap: 1.25rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .timeline-dot {
+        flex-shrink: 0;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: var(--moss);
+        color: var(--white);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 500;
+        margin-top: 2px;
+    }
+
+    .timeline-dot.amber { background: var(--clay); }
+    .timeline-dot.bark { background: var(--bark); }
+
+    .timeline-body h4 {
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--charcoal);
+        margin-bottom: 4px;
+    }
+
+    .timeline-body p {
+        font-size: 14px;
+        color: var(--muted);
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    /* COST TABLE */
+    .cost-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--sand);
+        font-size: 14px;
+    }
+
+    .cost-item:last-child { border: none; }
+    .cost-label { color: var(--charcoal); }
+    .cost-value { font-weight: 500; color: var(--moss); font-family: 'Playfair Display', serif; font-size: 15px; }
+    .cost-total { font-weight: 500; color: var(--bark); font-size: 16px; }
+
+    .cost-box {
+        background: var(--white);
+        border: 1px solid var(--sand-dark);
+        border-radius: 8px;
+        padding: 1.25rem 1.5rem;
+        margin: 2rem 0;
+    }
+
+    /* TEAM GRID */
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 16px;
+        margin: 2rem 0;
+    }
+
+    .team-card {
+        background: var(--white);
+        border: 1px solid var(--sand-dark);
+        border-radius: 8px;
+        padding: 1.25rem;
+        text-align: center;
+    }
+
+    .team-avatar {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        background: var(--moss);
+        color: var(--white);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        font-family: 'Playfair Display', serif;
+        font-weight: 600;
+        margin: 0 auto 0.75rem;
+    }
+
+    .team-name { font-size: 14px; font-weight: 500; color: var(--charcoal); margin-bottom: 2px; }
+    .team-role { font-size: 12px; color: var(--muted); }
+
+    /* ACKNOWLEDGEMENT BOX */
+    .ack-box {
+        background: var(--charcoal);
+        border-radius: 8px;
+        padding: 1.75rem 2rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .ack-box p {
+        color: var(--sand);
+        font-size: 15px;
+        font-style: italic;
+        margin: 0;
+        line-height: 1.8;
+    }
+
+    /* FOOTER */
+    footer {
+        background: var(--charcoal);
+        color: var(--muted);
+        text-align: center;
+        padding: 2rem;
+        font-size: 13px;
+        border-top: 1px solid #3a3530;
+    }
+
+    footer span { color: var(--clay-light); }
+
+    /* DIVIDER */
+    .divider {
+        height: 1px;
+        background: var(--sand-dark);
+        margin: 2.5rem 0;
+    }
+
+    /* TAG */
+    .tag {
+        display: inline-block;
+        background: var(--sand);
+        color: var(--bark);
+        font-size: 11px;
+        font-weight: 500;
+        padding: 3px 10px;
+        border-radius: 20px;
+        margin: 2px;
+        letter-spacing: 0.02em;
+    }
+
+    .tags { margin: 1rem 0; }
+
+    /* CRITERIA ROW */
+    .criteria-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
+        margin: 2rem 0;
+    }
+
+    .criteria-card {
+        background: var(--white);
+        border: 1px solid var(--sand-dark);
+        border-radius: 8px;
+        padding: 1rem;
+    }
+
+    .criteria-name { font-size: 13px; font-weight: 500; color: var(--charcoal); margin-bottom: 6px; }
+
+    .criteria-bar-bg {
+        height: 6px;
+        background: var(--sand);
+        border-radius: 3px;
+        overflow: hidden;
+    }
+
+    .criteria-bar {
+        height: 100%;
+        border-radius: 3px;
+        background: var(--moss);
+    }
+
+    .criteria-weight {
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 4px;
+    }
+    </style>
+    </head>
+    <body>
+
+    <nav>
+    <div class="nav-logo">Lama Lama Country<br><span>Low-Impact Visitor Accommodation</span></div>
+    <ul class="nav-links">
+        <li><a href="#" onclick="showPage('home')" class="active" id="nav-home">Home</a></li>
+        <li><a href="#" onclick="showPage('background')" id="nav-background">Background</a></li>
+        <li><a href="#" onclick="showPage('design')" id="nav-design">Design</a></li>
+        <li><a href="#" onclick="showPage('implementation')" id="nav-implementation">Implementation</a></li>
+        <li><a href="#" onclick="showPage('team')" id="nav-team">Team</a></li>
+    </ul>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div class="page active" id="page-home">
+    <div class="hero">
+        <div class="hero-inner">
+        <div class="hero-tag">EWB Challenge · Design Area 2.3</div>
+        <h1>Self-Maintaining<br>Accommodation on <em>Country</em></h1>
+        <p class="hero-sub">A low-impact, community-governed visitor accommodation design for Yintjingga (Port Stewart), Lama Lama Country, Cape York Peninsula.</p>
+        <div class="hero-meta">
+            <div class="hero-meta-item">
+            <span class="hero-meta-label">Location</span>
+            <span class="hero-meta-value">Port Stewart, Cape York, QLD</span>
+            </div>
+            <div class="hero-meta-item">
+            <span class="hero-meta-label">Community partner</span>
+            <span class="hero-meta-value">Yintjingga Aboriginal Corporation</span>
+            </div>
+            <div class="hero-meta-item">
+            <span class="hero-meta-label">Subject</span>
+            <span class="hero-meta-value">CITP · UTS Autumn 2026</span>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="ack-box">
+        <p>We acknowledge the Lama Lama people as the Traditional Custodians of Yintjingga (Port Stewart) and the surrounding Country. We pay our respects to Elders past and present, and recognise that sovereignty was never ceded. This design has been developed in the spirit of collaboration and respect for Lama Lama cultural protocols and land management authority.</p>
+        </div>
+
+        <div class="section-label">The problem</div>
+        <h2 class="section-title">Port Stewart needs accommodation that works for Country</h2>
+
+        <p>Port Stewart is one of Australia's most ecologically and culturally significant remote landscapes. Jointly managed by the Yintjingga Aboriginal Corporation (YAC) and Queensland Parks and Wildlife Service, it draws visitors for fishing, camping, and cultural tourism — yet the only available accommodation is basic camping at Warokutal Safari Camp.</p>
+
+        <p>There is no grid power, no town water, and one seasonal access road that becomes impassable for up to six months each year. Visitors who require weather-proof, accessible accommodation cannot be served. The Lama Lama community cannot grow a sustainable eco-tourism industry without infrastructure they can own and maintain themselves.</p>
+
+        <div class="pull-quote">
+        <p>How can low-impact visitor accommodation be provided at Port Stewart in a way that is culturally appropriate, environmentally sensitive, and maintainable by Lama Lama Rangers without outside expertise?</p>
+        </div>
+
+        <div class="stat-row">
+        <div class="stat">
+            <div class="stat-number">6</div>
+            <div class="stat-label">Elevated timber lodges proposed</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Off-grid — no diesel, no town water</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">$2.5M</div>
+            <div class="stat-label">Estimated total project cost</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">131</div>
+            <div class="stat-label">Weighted design score (highest of 4 options)</div>
+        </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section-label">Our solution</div>
+        <h2 class="section-title">Self-maintaining elevated accommodation</h2>
+
+        <div class="card-grid">
+        <div class="card">
+            <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+            </div>
+            <h4>Elevated timber lodges</h4>
+            <p>Ironbark and spotted gum on 1.5–2m stilts. Flood-proof, termite-resistant, locally sourceable.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+            <h4>Shared solar + battery</h4>
+            <p>Community solar array sized for all 6 lodges. Simple enough for rangers to maintain — no contractors needed.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            </div>
+            <h4>Rainwater + composting</h4>
+            <p>Gravity-fed rainwater harvesting with dry-season storage. Composting toilets — no sewage infrastructure.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <h4>Ranger-integrated governance</h4>
+            <p>Visitor check-in at ranger base. All systems trained and handed over to Lama Lama Rangers before opening.</p>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- BACKGROUND PAGE -->
+    <div class="page" id="page-background">
+    <div class="hero">
+        <div class="hero-inner">
+        <div class="hero-tag">Context</div>
+        <h1>Understanding<br>Lama Lama <em>Country</em></h1>
+        <p class="hero-sub">Environmental, economic, and socio-cultural context shaping every design decision.</p>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="section-label">Environmental</div>
+        <h2 class="section-title">A landscape that demands respect</h2>
+
+        <p>Port Stewart experiences a tropical monsoon climate with a wet season from December to June and a dry season from July to November. Annual rainfall exceeds 1,200mm in the northern Cape York region, the majority falling during wet season monsoon events. The region is subject to cyclone risk, seasonal river flooding, and coastal storm surge from the Stewart and Annie Rivers.</p>
+
+        <p>The surrounding ecosystems include coastal mangroves, riparian zones, and tropical woodlands — all of high ecological value supporting significant native biodiversity. Any development must avoid wetlands, dense vegetation, and wildlife habitats, and must be designed to withstand seasonal inundation and high wind events.</p>
+
+        <div class="divider"></div>
+
+        <div class="section-label">Economic</div>
+        <h2 class="section-title">Remote construction — real costs</h2>
+
+        <p>Remote construction in Cape York carries a cost multiplier of 1.5 to 2 times the equivalent urban build, driven by transport logistics, labour shortages, and wet season access constraints. There is no electricity grid and no reticulated water supply — all infrastructure must be purpose-built.</p>
+
+        <p>Despite these constraints, eco-tourism presents a genuine economic opportunity. At $300 per night and 50% occupancy, a six-cabin colony could generate approximately $327,600 per year — revenue that directly supports ranger operations and community programs.</p>
+
+        <div class="divider"></div>
+
+        <div class="section-label">Socio-cultural</div>
+        <h2 class="section-title">Governance and cultural authority</h2>
+
+        <p>Lama Lama Country is jointly managed by the Yintjingga Aboriginal Corporation (YAC) and QPWS. All visitors must check in at the Port Stewart Ranger Base before entering Country. The Aboriginal Cultural Heritage Act 2003 imposes a duty of care on any development to avoid harming cultural heritage — which extends beyond artefacts to land of cultural and historical significance.</p>
+
+        <p>Sacred and restricted sites are present within and adjacent to the proposed development zone. Consultation with Traditional Owners and Elders is not a formality — it is a legal and ethical prerequisite, and Traditional Owners are the ultimate authority on whether development proceeds.</p>
+
+        <div class="divider"></div>
+
+        <div class="section-label">Comparable models</div>
+        <h2 class="section-title">What works elsewhere on Country</h2>
+
+        <div class="card-grid">
+        <div class="card">
+            <h4>Karijini Eco Retreat (WA)</h4>
+            <p>Aboriginal-owned, off-grid solar, composting toilets, semi-permanent eco tents. Proves the commercial model is viable on Country.</p>
+        </div>
+        <div class="card">
+            <h4>Dhimurru IPA (Arnhem Land)</h4>
+            <p>Ranger-led permit system, designated camping areas, controlled access points. Minimal infrastructure, maximum cultural protection.</p>
+        </div>
+        <div class="card">
+            <h4>Karajarri Country (WA)</h4>
+            <p>Visitor pass revenue funds ranger operations directly — tourism sustains land management rather than degrading it.</p>
+        </div>
+        </div>
+
+        <div class="pull-quote">
+        <p>Across all successful models: ranger-controlled access, low environmental footprint, community governance, permit-based entry.</p>
+        </div>
+    </div>
+    </div>
+
+    <!-- DESIGN PAGE -->
+    <div class="page" id="page-design">
+    <div class="hero">
+        <div class="hero-inner">
+        <div class="hero-tag">Design solution</div>
+        <h1>Self-Maintaining<br><em>Elevated</em> Accommodation</h1>
+        <p class="hero-sub">How we evaluated four options and arrived at the winning design.</p>
+        </div>
+    </div>
+
+    <div class="content-wide">
+        <div class="content" style="padding-bottom: 0;">
+        <div class="section-label">Weighted criteria</div>
+        <h2 class="section-title">How we scored each option</h2>
+
+        <div class="criteria-grid">
+            <div class="criteria-card">
+            <div class="criteria-name">Culturally appropriate</div>
+            <div class="criteria-bar-bg"><div class="criteria-bar" style="width:100%"></div></div>
+            <div class="criteria-weight">Weight: 5 / 5</div>
+            </div>
+            <div class="criteria-card">
+            <div class="criteria-name">Inclusion for all</div>
+            <div class="criteria-bar-bg"><div class="criteria-bar" style="width:100%"></div></div>
+            <div class="criteria-weight">Weight: 6 — highest</div>
+            </div>
+            <div class="criteria-card">
+            <div class="criteria-name">Technical design</div>
+            <div class="criteria-bar-bg"><div class="criteria-bar" style="width:100%"></div></div>
+            <div class="criteria-weight">Weight: 5 / 5</div>
+            </div>
+            <div class="criteria-card">
+            <div class="criteria-name">Lifecycle</div>
+            <div class="criteria-bar-bg"><div class="criteria-bar" style="width:80%"></div></div>
+            <div class="criteria-weight">Weight: 4 / 5</div>
+            </div>
+            <div class="criteria-card">
+            <div class="criteria-name">Low cost</div>
+            <div class="criteria-bar-bg"><div class="criteria-bar" style="width:80%"></div></div>
+            <div class="criteria-weight">Weight: 4 / 5</div>
+            </div>
+            <div class="criteria-card">
+            <div class="criteria-name">Materials</div>
+            <div class="criteria-bar-bg"><div class="criteria-bar" style="width:80%"></div></div>
+            <div class="criteria-weight">Weight: 4 / 5</div>
+            </div>
+            <div class="criteria-card">
+            <div class="criteria-name">Community engagement</div>
+            <div class="criteria-bar-bg"><div class="criteria-bar" style="width:60%"></div></div>
+            <div class="criteria-weight">Weight: 3 / 5</div>
+            </div>
+            <div class="criteria-card">
+            <div class="criteria-name">Deliver &amp; ongoing management</div>
+            <div class="criteria-bar-bg"><div class="criteria-bar" style="width:60%"></div></div>
+            <div class="criteria-weight">Weight: 3 / 5</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section-label">Decision matrix</div>
+        <h2 class="section-title">Four options, one clear winner</h2>
+        </div>
+
+        <div style="padding: 0 2rem 2rem;">
+        <div class="table-wrap">
+            <table>
+            <thead>
+                <tr>
+                <th>Design option</th>
+                <th>Culturally appropriate</th>
+                <th>Low cost</th>
+                <th>Materials</th>
+                <th>Community engagement</th>
+                <th>Technical design</th>
+                <th>Inclusion for all</th>
+                <th>Lifecycle</th>
+                <th>Deliver &amp; management</th>
+                <th>Total score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="winner">
+                <td><strong>Self-maintaining accommodation ✓</strong></td>
+                <td>25</td><td>16</td><td>12</td><td>12</td><td>25</td><td>9</td><td>20</td><td>12</td>
+                <td><span class="score-pill winner">131</span></td>
+                </tr>
+                <tr>
+                <td>Elevated eco camping platforms</td>
+                <td>25</td><td>16</td><td>20</td><td>9</td><td>25</td><td>6</td><td>12</td><td>9</td>
+                <td><span class="score-pill mid">122</span></td>
+                </tr>
+                <tr>
+                <td>Standardised rural housing</td>
+                <td>25</td><td>20</td><td>16</td><td>9</td><td>20</td><td>9</td><td>12</td><td>6</td>
+                <td><span class="score-pill mid">117</span></td>
+                </tr>
+                <tr>
+                <td>Cultural ecotourist camp</td>
+                <td>25</td><td>16</td><td>16</td><td>6</td><td>25</td><td>1</td><td>8</td><td>3</td>
+                <td><span class="score-pill low">102</span></td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+        </div>
+
+        <div class="content" style="padding-top: 0;">
+        <p>Self-maintaining accommodation scored highest by 9 points. The margin is largest on <strong>lifecycle</strong> and <strong>deliver and ongoing management</strong> — the two criteria most directly tied to the remote context and community capability requirements. This is not a marginal win: the design is specifically optimised for the conditions that make Lama Lama Country unique.</p>
+
+        <div class="divider"></div>
+
+        <div class="section-label">Final design</div>
+        <h2 class="section-title">How the design works</h2>
+
+        <h3>Lodge structure and materials</h3>
+        <p>Six lodges constructed from locally sourced ironbark and spotted gum hardwood — naturally termite-resistant and durable in tropical conditions. A hybrid construction method is used: modular wall panels and roof systems are prefabricated off-site, while foundations and stilts are constructed on-site to adapt to local ground conditions.</p>
+        <p>Each lodge is elevated 1.5 to 2 metres on hardwood stilts, allowing floodwater to pass underneath and providing passive underfloor ventilation. Extended roof overhangs and louvred wall panels promote cross-ventilation, eliminating the need for mechanical cooling.</p>
+
+        <div class="tags">
+            <span class="tag">Ironbark + spotted gum</span>
+            <span class="tag">1.5–2m stilt elevation</span>
+            <span class="tag">Hybrid prefab + on-site</span>
+            <span class="tag">Cross-ventilation</span>
+            <span class="tag">50–100m river setback</span>
+        </div>
+
+        <h3>Energy system</h3>
+        <p>A shared solar photovoltaic array with battery storage powers all six lodges and the communal hub. Designed on the "hi-tech, low-spec" principle — component selection prioritises simplicity and replaceability so trained rangers can diagnose and fix faults without specialist contractors. Precedent: Pormpuraaw (210kW community solar, $40k/year savings), Lockhart River (209kW + 60kWh battery).</p>
+
+        <h3>Water and waste</h3>
+        <p>Centralised rainwater harvesting with dry-season storage capacity, first-flush diverters, and 1mm mesh screens per Queensland Development Code MP 4.2. Composting toilets eliminate sewage infrastructure. Greywater managed through subsurface irrigation — kept away from waterways and sensitive ecosystems.</p>
+
+        <h3>Communal hub</h3>
+        <p>A central hub provides shared kitchen and bathroom facilities, a ranger information point, and a visitor check-in area. It reinforces ranger-controlled access as the first point of contact on arrival, and reduces the infrastructure load on individual lodges.</p>
+        </div>
+    </div>
+    </div>
+
+    <!-- IMPLEMENTATION PAGE -->
+    <div class="page" id="page-implementation">
+    <div class="hero">
+        <div class="hero-inner">
+        <div class="hero-tag">Implementation + costs</div>
+        <h1>Staged, <em>Community-Led</em><br>Delivery</h1>
+        <p class="hero-sub">A phased approach that manages financial risk, respects cultural protocols, and builds toward self-funded stewardship.</p>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="section-label">Implementation plan</div>
+        <h2 class="section-title">Four phases to full operation</h2>
+
+        <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-dot">1</div>
+            <div class="timeline-body">
+            <h4>Community consultation + approvals</h4>
+            <p>Formal consultation with Lama Lama Elders and YAC. Cultural mapping review. Grant applications to ARENA, Queensland Government, Indigenous Business Australia. Cook Shire Council permits. This phase cannot be shortened — Traditional Owners are the ultimate authority.</p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-dot amber">2</div>
+            <div class="timeline-body">
+            <h4>Stage 1 — 2 lodges (minimal viable build)</h4>
+            <p>Basic solar (portable panels + batteries), 1 rainwater tank, gravity filter. Communal hub deferred — shade structure only. Volunteer build weekend with ranger participation. Basic fit-out: cots, mosquito nets, solar lighting.</p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-dot amber">3</div>
+            <div class="timeline-body">
+            <h4>Ranger training + handover</h4>
+            <p>All systems trained and formally signed off before any guests are received. Rangers take full operational responsibility. Monitoring period: track revenue, maintenance needs, visitor feedback.</p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-dot bark">4</div>
+            <div class="timeline-body">
+            <h4>Stage 2 — Full 6-lodge colony (grant-dependent)</h4>
+            <p>If grant secured: +4 lodges, full shared solar array + battery, permanent communal hub, complete water and waste infrastructure. If not: 2 lodges operate and generate revenue (~$109,200/year) to fund Stage 2 independently.</p>
+            </div>
+        </div>
+        </div>
+
+        <div class="pull-quote">
+        <p>Wet season road closure = natural seasonal closure. This aligns with existing ranger protocols and removes the need for active shutdown management.</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section-label">Cost analysis</div>
+        <h2 class="section-title">What it costs — and how it pays back</h2>
+
+        <div class="cost-box">
+        <div class="cost-item">
+            <span class="cost-label">6 lodges × ~$300,000 each</span>
+            <span class="cost-value">$1,800,000</span>
+        </div>
+        <div class="cost-item">
+            <span class="cost-label">Shared solar + battery system</span>
+            <span class="cost-value">$200,000</span>
+        </div>
+        <div class="cost-item">
+            <span class="cost-label">Water + waste (6 × $20,000)</span>
+            <span class="cost-value">$120,000</span>
+        </div>
+        <div class="cost-item">
+            <span class="cost-label">Site works + access</span>
+            <span class="cost-value">$200,000 – $400,000</span>
+        </div>
+        <div class="cost-item" style="border-top: 2px solid var(--sand-dark); margin-top: 4px; padding-top: 14px;">
+            <span class="cost-label" style="font-weight:500;">Total project estimate</span>
+            <span class="cost-value cost-total">$2.3M – $2.7M</span>
+        </div>
+        </div>
+
+        <div class="stat-row">
+        <div class="stat">
+            <div class="stat-number" style="font-size:1.5rem;">$10–20k</div>
+            <div class="stat-label">Annual maintenance per cabin (3–6% of build cost)</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number" style="font-size:1.5rem;">$300</div>
+            <div class="stat-label">Nightly rate (comparable remote eco-tourism)</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number" style="font-size:1.5rem;">$328k</div>
+            <div class="stat-label">Revenue/year at 50% occupancy, 6 cabins</div>
+        </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section-label">Limitations</div>
+        <h2 class="section-title">Honest constraints</h2>
+
+        <p><strong>Wet season access.</strong> Construction and resupply are impossible for up to six months per year. All materials must be staged and delivered during the dry season window.</p>
+        <p><strong>Upfront cost.</strong> The $2.3M–$2.7M total requires grant funding — the project is not self-funding from the outset. Staged delivery mitigates this risk.</p>
+        <p><strong>Community training.</strong> Systems cannot simply be installed and left. Ranger training is a prerequisite, not an optional add-on.</p>
+        <p><strong>Ongoing consultation.</strong> Cultural consultation with YAC and Elders is not a one-time step — it must continue throughout construction and operation.</p>
+    </div>
+    </div>
+
+    <!-- TEAM PAGE -->
+    <div class="page" id="page-team">
+    <div class="hero">
+        <div class="hero-inner">
+        <div class="hero-tag">Group Declaration</div>
+        <h1>Our <em>Team</em></h1>
+        <p class="hero-sub">CITP · UTS Autumn 2026 · EWB Challenge Design Area 2.3</p>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="section-label">Contributing members</div>
+        <h2 class="section-title">Who worked on this project</h2>
+
+        <div class="team-grid">
+        <div class="team-card">
+            <div class="team-avatar">S</div>
+            <div class="team-name">Samarra</div>
+            <div class="team-role">Site selection · Energy · Report lead</div>
+        </div>
+        <div class="team-card">
+            <div class="team-avatar">Y</div>
+            <div class="team-name">Yashfa</div>
+            <div class="team-role">Community + governance</div>
+        </div>
+        <div class="team-card">
+            <div class="team-avatar">N</div>
+            <div class="team-name">Nisa</div>
+            <div class="team-role">Water + waste systems</div>
+        </div>
+        <div class="team-card">
+            <div class="team-avatar">+</div>
+            <div class="team-name">Member 4</div>
+            <div class="team-role">Materials + cost analysis</div>
+        </div>
+        </div>
+
+        <p style="font-size:13px; color:var(--muted); margin-top:1rem;">Update names and roles to reflect your actual group before submission.</p>
+
+        <div class="divider"></div>
+
+        <div class="section-label">Declaration</div>
+        <h2 class="section-title">Teamwork declaration</h2>
+        <p>We declare that the work presented on this website is the original work of the contributing team members listed above. All sources have been cited using APA referencing. This is a group assessment submitted for CITP at the University of Technology Sydney, Autumn 2026.</p>
+
+        <div class="divider"></div>
+
+        <div class="section-label">References</div>
+        <h2 class="section-title">Key sources</h2>
+
+        <p style="font-size:13px; line-height:2; color:var(--muted);">
+        Bureau of Meteorology. (2024). <em>Cape York regional weather and climate guide.</em> https://www.bom.gov.au/climate/climate-guides/guides/025-Cape-York-QLD-Climate-Guide.pdf<br>
+        Centre for Appropriate Technology. (2021). <em>Technology on country: Energy and renewables.</em> https://www.cfat.org.au/toc-energy-renewables<br>
+        Lama Lama Land Trust. (n.d.). <em>Visiting Lama Lama Country.</em> https://www.lamalama.org.au/visiting/<br>
+        Martire, J. L. (2020). Powering Indigenous communities with renewables. <em>Renew Magazine.</em> https://renew.org.au<br>
+        One Step Off The Grid. (2020). Remote Queensland communities set to cut costs with solar power. https://onestepoffthegrid.com.au<br>
+        Queensland Government. (2024). <em>Queensland Plumbing and Wastewater Code.</em> https://www.housing.qld.gov.au<br>
+        Queensland Reconstruction Authority. (2023). <em>Flood resilient building guidance for Queensland homes.</em> https://www.qra.qld.gov.au<br>
+        Sustainability Matters. (n.d.). Large-scale solar and storage project provides power to Cape York. https://www.sustainabilitymatters.net.au
+        </p>
+    </div>
+    </div>
+
+    <footer>
+    EWB Challenge DA 2.3 · <span>Lama Lama Low-Impact Accommodation</span> · CITP UTS Autumn 2026
+    </footer>
+
+    <script>
+    function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    document.getElementById('nav-' + id).classList.add('active');
+    window.scrollTo(0, 0);
+    return false;
+    }
+    </script>
+
+    </body>
+    </html>
